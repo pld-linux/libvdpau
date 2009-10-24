@@ -2,19 +2,20 @@ Summary:	Wrapper library for the Video Decode and Presentation API
 Summary(pl.UTF-8):	Biblioteka pośrednia do API dekodowania i prezentacji video (Video Decode and Presentation API)
 Name:		libvdpau
 Version:	0.2
-Release:	0.1
+Release:	1
 License:	MIT
 Group:		Libraries
 Source0:	http://people.freedesktop.org/~aplattner/vdpau/%{name}-%{version}.tar.gz
 # Source0-md5:	e0641a208839eb88fe7c01ee5af83735
 URL:		http://freedesktop.org/wiki/Software/VDPAU
-BuildRequires:	autoconf
+BuildRequires:	autoconf >= 2.57
 BuildRequires:	automake
 BuildRequires:	libstdc++-devel
 BuildRequires:	libtool
 BuildRequires:	pkgconfig
 BuildRequires:	xorg-lib-libX11-devel
-# same as in xorg-driver-video-nvidia.spec
+# libvdpau isn't arch-specific, but currently only nvidia driver is available
+# (xorg-driver-video-nvidia.spec)
 ExclusiveArch:	%{ix86} %{x8664}
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -71,6 +72,8 @@ rm -rf $RPM_BUILD_ROOT
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
 
+%{__rm} $RPM_BUILD_ROOT%{_libdir}/libvdpau_trace.{la,a}
+
 %clean
 rm -rf $RPM_BUILD_ROOT
 
@@ -80,16 +83,17 @@ rm -rf $RPM_BUILD_ROOT
 %files
 %defattr(644,root,root,755)
 %doc AUTHORS COPYING ChangeLog
-%attr(755,root,root) %{_libdir}/lib*.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/lib*.so.?
+%attr(755,root,root) %{_libdir}/libvdpau.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/libvdpau.so.1
+%attr(755,root,root) %{_libdir}/libvdpau_trace.so
 
 %files devel
 %defattr(644,root,root,755)
-%{_libdir}/lib*.so
-%{_libdir}/lib*.la
+%attr(755,root,root) %{_libdir}/libvdpau.so
+%{_libdir}/libvdpau.la
 %{_includedir}/vdpau
-%{_pkgconfigdir}/*.pc
+%{_pkgconfigdir}/vdpau.pc
 
 %files static
 %defattr(644,root,root,755)
-%{_libdir}/lib*.a
+%{_libdir}/libvdpau.a
