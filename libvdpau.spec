@@ -18,6 +18,7 @@ BuildRequires:	xorg-lib-libX11-devel
 # (xorg-driver-video-nvidia.spec)
 ExclusiveArch:	%{ix86} %{x8664}
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
+Conflicts:	xorg-driver-video-nvidia-libs
 
 %description
 VDPAU is the Video Decode and Presentation API for UNIX. It provides
