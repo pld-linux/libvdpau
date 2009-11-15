@@ -16,7 +16,7 @@ BuildRequires:	pkgconfig
 BuildRequires:	xorg-lib-libX11-devel
 # libvdpau isn't arch-specific, but currently only nvidia driver is available
 # (xorg-driver-video-nvidia.spec)
-Conflicts:	xorg-driver-video-nvidia-libs
+Conflicts:	xorg-driver-video-nvidia-libs < 1:190.42-2
 ExclusiveArch:	%{ix86} %{x8664}
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
