@@ -1,12 +1,12 @@
 Summary:	Wrapper library for the Video Decode and Presentation API
 Summary(pl.UTF-8):	Biblioteka pośrednia do API dekodowania i prezentacji video (Video Decode and Presentation API)
 Name:		libvdpau
-Version:	0.2
+Version:	0.3
 Release:	1
 License:	MIT
 Group:		Libraries
 Source0:	http://people.freedesktop.org/~aplattner/vdpau/%{name}-%{version}.tar.gz
-# Source0-md5:	e0641a208839eb88fe7c01ee5af83735
+# Source0-md5:	2ae5b15d6ede1c96f0fa0aefcc573297
 URL:		http://freedesktop.org/wiki/Software/VDPAU
 BuildRequires:	autoconf >= 2.57
 BuildRequires:	automake
@@ -73,7 +73,7 @@ rm -rf $RPM_BUILD_ROOT
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
 
-%{__rm} $RPM_BUILD_ROOT%{_libdir}/libvdpau_trace.{la,a}
+%{__rm} $RPM_BUILD_ROOT%{_libdir}/vdpau/libvdpau_trace.{la,a}
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -86,7 +86,9 @@ rm -rf $RPM_BUILD_ROOT
 %doc AUTHORS COPYING ChangeLog
 %attr(755,root,root) %{_libdir}/libvdpau.so.*.*.*
 %attr(755,root,root) %ghost %{_libdir}/libvdpau.so.1
-%attr(755,root,root) %{_libdir}/libvdpau_trace.so
+%dir %{_libdir}/vdpau
+%attr(755,root,root) %{_libdir}/vdpau/libvdpau_trace.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/vdpau/libvdpau_trace.so.1
 
 %files devel
 %defattr(644,root,root,755)
