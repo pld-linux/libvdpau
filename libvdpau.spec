@@ -88,7 +88,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %ghost %{_libdir}/libvdpau.so.1
 %dir %{_libdir}/vdpau
 %attr(755,root,root) %{_libdir}/vdpau/libvdpau_trace.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/vdpau/libvdpau_trace.so.1
+%attr(755,root,root) %{_libdir}/vdpau/libvdpau_trace.so.1
 
 %files devel
 %defattr(644,root,root,755)
