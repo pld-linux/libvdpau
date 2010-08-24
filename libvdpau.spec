@@ -1,3 +1,11 @@
+#
+# Conditional build:
+%if "%{pld_release}" == "ac"
+%bcond_with		apidocs		# build and package API docs
+%else
+%bcond_without	apidocs		# do not build and package API docs
+%endif
+
 Summary:	Wrapper library for the Video Decode and Presentation API
 Summary(pl.UTF-8):	Biblioteka pośrednia do API dekodowania i prezentacji video (Video Decode and Presentation API)
 Name:		libvdpau
@@ -13,6 +21,7 @@ BuildRequires:	automake
 BuildRequires:	libstdc++-devel
 BuildRequires:	libtool
 BuildRequires:	pkgconfig
+BuildRequires:	rpm >= 4.4.9-56
 BuildRequires:	xorg-lib-libX11-devel
 # libvdpau isn't arch-specific, but currently only nvidia driver is available
 # (xorg-driver-video-nvidia.spec)
@@ -54,6 +63,17 @@ Static vdpau library.
 %description static -l pl.UTF-8
 Statyczna biblioteka vdpau.
 
+%package apidocs
+Summary:	vdpau API documentation
+Summary(pl.UTF-8):	Dokumentacja API biblioteki vdpau
+Group:		Documentation
+
+%description apidocs
+API and internal documentation for vdpau library.
+
+%description apidocs -l pl.UTF-8
+Dokumentacja API biblioteki vdpau.
+
 %prep
 %setup -q
 
@@ -64,6 +84,7 @@ Statyczna biblioteka vdpau.
 %{__autoheader}
 %{__automake}
 %configure \
+	%{!?with_apidocs:--disable-documentation} \
 	--enable-static
 %{__make}
 
@@ -74,6 +95,7 @@ rm -rf $RPM_BUILD_ROOT
 	DESTDIR=$RPM_BUILD_ROOT
 
 %{__rm} $RPM_BUILD_ROOT%{_libdir}/vdpau/libvdpau_trace.{la,a}
+%{__rm} $RPM_BUILD_ROOT%{_libdir}/vdpau/libvdpau_trace.so
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -100,3 +122,9 @@ rm -rf $RPM_BUILD_ROOT
 %files static
 %defattr(644,root,root,755)
 %{_libdir}/libvdpau.a
+
+%if %{with apidocs}
+%files apidocs
+%defattr(644,root,root,755)
+%{_docdir}/%{name}/html/*
+%endif
