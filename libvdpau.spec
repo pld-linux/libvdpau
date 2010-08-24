@@ -22,7 +22,11 @@ BuildRequires:	libstdc++-devel
 BuildRequires:	libtool
 BuildRequires:	pkgconfig
 BuildRequires:	rpm >= 4.4.9-56
+%if "%{pld_release}" == "ac"
+BuildRequires:	XFree86-devel
+%else
 BuildRequires:	xorg-lib-libX11-devel
+%endif
 # libvdpau isn't arch-specific, but currently only nvidia driver is available
 # (xorg-driver-video-nvidia.spec)
 Conflicts:	xorg-driver-video-nvidia-libs < 1:190.42-2
@@ -83,6 +87,9 @@ Dokumentacja API biblioteki vdpau.
 %{__autoconf}
 %{__autoheader}
 %{__automake}
+%if "%{pld_release}" == "ac"
+X11_CFLAGS=" " X11_LIBS="-L%{_prefix}/X11R6/%{_lib} -lX11" \
+%endif
 %configure \
 	%{!?with_apidocs:--disable-documentation} \
 	--enable-static
