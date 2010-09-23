@@ -10,7 +10,7 @@ Summary:	Wrapper library for the Video Decode and Presentation API
 Summary(pl.UTF-8):	Biblioteka pośrednia do API dekodowania i prezentacji video (Video Decode and Presentation API)
 Name:		libvdpau
 Version:	0.4
-Release:	2
+Release:	3
 License:	MIT
 Group:		Libraries
 Source0:	http://people.freedesktop.org/~aplattner/vdpau/%{name}-%{version}.tar.gz
@@ -104,6 +104,8 @@ rm -rf $RPM_BUILD_ROOT
 %{__rm} $RPM_BUILD_ROOT%{_libdir}/vdpau/libvdpau_trace.{la,a}
 %{__rm} $RPM_BUILD_ROOT%{_libdir}/vdpau/libvdpau_trace.so
 
+mv $RPM_BUILD_ROOT%{_docdir}/{%{name}/html,%{name}-apidocs}
+
 %clean
 rm -rf $RPM_BUILD_ROOT
 
@@ -133,5 +135,5 @@ rm -rf $RPM_BUILD_ROOT
 %if %{with apidocs}
 %files apidocs
 %defattr(644,root,root,755)
-%{_docdir}/%{name}/html/*
+%{_docdir}/%{name}-apidocs
 %endif
