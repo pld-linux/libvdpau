@@ -18,6 +18,10 @@ Source0:	http://people.freedesktop.org/~aplattner/vdpau/%{name}-%{version}.tar.g
 URL:		http://freedesktop.org/wiki/Software/VDPAU
 BuildRequires:	autoconf >= 2.57
 BuildRequires:	automake
+%if %{with apidocs}
+BuildRequires:	doxygen
+BuildRequires:	graphviz
+%endif
 BuildRequires:	libstdc++-devel
 BuildRequires:	libtool
 BuildRequires:	pkgconfig
@@ -91,7 +95,7 @@ Dokumentacja API biblioteki vdpau.
 X11_CFLAGS=" " X11_LIBS="-L%{_prefix}/X11R6/%{_lib} -lX11" \
 %endif
 %configure \
-	%{!?with_apidocs:--disable-documentation} \
+	--%{!?with_apidocs:dis}%{?with_apidocs:en}able-documentation \
 	--enable-static
 %{__make}
 
