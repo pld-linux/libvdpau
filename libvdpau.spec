@@ -108,7 +108,9 @@ rm -rf $RPM_BUILD_ROOT
 %{__rm} $RPM_BUILD_ROOT%{_libdir}/vdpau/libvdpau_trace.{la,a}
 %{__rm} $RPM_BUILD_ROOT%{_libdir}/vdpau/libvdpau_trace.so
 
+%if %{with apidocs}
 mv $RPM_BUILD_ROOT%{_docdir}/{%{name}/html,%{name}-apidocs}
+%endif
 
 %clean
 rm -rf $RPM_BUILD_ROOT
