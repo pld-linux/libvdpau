@@ -29,7 +29,10 @@ BuildRequires:	rpm >= 4.4.9-56
 %if "%{pld_release}" == "ac"
 BuildRequires:	XFree86-devel
 %else
+%{?with_apidocs:BuildRequires:	texlive-latex}
 BuildRequires:	xorg-lib-libX11-devel
+BuildRequires:	xorg-lib-libXext-devel
+BuildRequires:	xorg-proto-dri2proto-devel
 %endif
 # libvdpau isn't arch-specific, but currently only nvidia driver is available
 # (xorg-driver-video-nvidia.spec)
