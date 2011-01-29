@@ -54,6 +54,11 @@ prezentacji video obecnej we współczesnych procesorach graficznych.
 Summary:	Header files for vdpau library
 Summary(pl.UTF-8):	Pliki nagłówkowe biblioteki vdpau
 Group:		Development/Libraries
+%if "%{pld_release}" == "ac"
+Requires:	XFree86-devel
+%else
+Requires:	xorg-lib-libX11-devel
+%endif
 Requires:	%{name} = %{version}-%{release}
 
 %description devel
