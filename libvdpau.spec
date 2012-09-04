@@ -16,7 +16,7 @@ Group:		Libraries
 Source0:	http://people.freedesktop.org/~aplattner/vdpau/%{name}-%{version}.tar.gz
 # Source0-md5:	94c6d0ef2b1c0407c5cf89ca6f9ade88
 URL:		http://freedesktop.org/wiki/Software/VDPAU
-BuildRequires:	autoconf >= 2.57
+BuildRequires:	autoconf >= 2.60
 BuildRequires:	automake
 %if %{with apidocs}
 BuildRequires:	doxygen
@@ -32,7 +32,7 @@ BuildRequires:	XFree86-devel
 %{?with_apidocs:BuildRequires:	texlive-latex}
 BuildRequires:	xorg-lib-libX11-devel
 BuildRequires:	xorg-lib-libXext-devel
-BuildRequires:	xorg-proto-dri2proto-devel
+BuildRequires:	xorg-proto-dri2proto-devel >= 2.2
 %endif
 # libvdpau isn't arch-specific, but currently only nvidia driver is available
 # (xorg-driver-video-nvidia.spec)
@@ -103,7 +103,7 @@ Dokumentacja API biblioteki vdpau.
 X11_CFLAGS=" " X11_LIBS="-L%{_prefix}/X11R6/%{_lib} -lX11" \
 %endif
 %configure \
-	--%{!?with_apidocs:dis}%{?with_apidocs:en}able-documentation \
+	--enable-documentation%{!?with_apidocs:=no} \
 	--enable-static
 %{__make}
 
