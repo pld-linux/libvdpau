@@ -9,12 +9,12 @@
 Summary:	Wrapper library for the Video Decode and Presentation API
 Summary(pl.UTF-8):	Biblioteka pośrednia do API dekodowania i prezentacji video (Video Decode and Presentation API)
 Name:		libvdpau
-Version:	0.5
+Version:	0.6
 Release:	1
 License:	MIT
 Group:		Libraries
 Source0:	http://people.freedesktop.org/~aplattner/vdpau/%{name}-%{version}.tar.gz
-# Source0-md5:	94c6d0ef2b1c0407c5cf89ca6f9ade88
+# Source0-md5:	78a3a992b8187182463d3998e5d17916
 URL:		http://freedesktop.org/wiki/Software/VDPAU
 BuildRequires:	autoconf >= 2.60
 BuildRequires:	automake
@@ -29,7 +29,7 @@ BuildRequires:	rpm >= 4.4.9-56
 %if "%{pld_release}" == "ac"
 BuildRequires:	XFree86-devel
 %else
-%{?with_apidocs:BuildRequires:	texlive-latex}
+%{?with_apidocs:BuildRequires:	texlive-pdftex}
 BuildRequires:	xorg-lib-libX11-devel
 BuildRequires:	xorg-lib-libXext-devel
 BuildRequires:	xorg-proto-dri2proto-devel >= 2.2
