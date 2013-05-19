@@ -10,7 +10,7 @@ Summary:	Wrapper library for the Video Decode and Presentation API
 Summary(pl.UTF-8):	Biblioteka pośrednia do API dekodowania i prezentacji video (Video Decode and Presentation API)
 Name:		libvdpau
 Version:	0.6
-Release:	1
+Release:	2
 License:	MIT
 Group:		Libraries
 Source0:	http://people.freedesktop.org/~aplattner/vdpau/%{name}-%{version}.tar.gz
@@ -30,12 +30,13 @@ BuildRequires:	rpm >= 4.4.9-56
 BuildRequires:	XFree86-devel
 %else
 %{?with_apidocs:BuildRequires:	texlive-pdftex}
-BuildRequires:	xorg-lib-libX11-devel
+BuildRequires:	xorg-lib-libX11-devel >= 1.5
 BuildRequires:	xorg-lib-libXext-devel
 BuildRequires:	xorg-proto-dri2proto-devel >= 2.2
 %endif
 # libvdpau isn't arch-specific, but currently only nvidia driver is available
 # (xorg-driver-video-nvidia.spec)
+BuildRequires:	xorg-lib-libX11 >= 1.5
 Conflicts:	xorg-driver-video-nvidia-libs < 1:190.42-2
 ExclusiveArch:	%{ix86} %{x8664}
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
