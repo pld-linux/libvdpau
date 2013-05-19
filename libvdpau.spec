@@ -34,9 +34,9 @@ BuildRequires:	xorg-lib-libX11-devel >= 1.5
 BuildRequires:	xorg-lib-libXext-devel
 BuildRequires:	xorg-proto-dri2proto-devel >= 2.2
 %endif
+Requires:	xorg-lib-libX11 >= 1.5
 # libvdpau isn't arch-specific, but currently only nvidia driver is available
 # (xorg-driver-video-nvidia.spec)
-BuildRequires:	xorg-lib-libX11 >= 1.5
 Conflicts:	xorg-driver-video-nvidia-libs < 1:190.42-2
 ExclusiveArch:	%{ix86} %{x8664}
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
