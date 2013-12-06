@@ -35,10 +35,10 @@ BuildRequires:	xorg-lib-libXext-devel
 BuildRequires:	xorg-proto-dri2proto-devel >= 2.2
 %endif
 Requires:	xorg-lib-libX11 >= 1.5
-# libvdpau isn't arch-specific, but currently only nvidia driver is available
-# (xorg-driver-video-nvidia.spec)
+# withdrawn (and never useful) Mesa drivers
+Obsoletes:	libvdpau-driver-mesa-r300 < 10
+Obsoletes:	libvdpau-driver-mesa-softpipe < 10
 Conflicts:	xorg-driver-video-nvidia-libs < 1:190.42-2
-ExclusiveArch:	%{ix86} %{x8664}
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
