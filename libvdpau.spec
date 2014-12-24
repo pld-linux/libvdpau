@@ -15,6 +15,7 @@ License:	MIT
 Group:		Libraries
 Source0:	http://people.freedesktop.org/~aplattner/vdpau/%{name}-%{version}.tar.gz
 # Source0-md5:	3a1f8f3ec6e6adcfbc6044c8f00d7d51
+Patch0:		link-X11.patch
 URL:		http://freedesktop.org/wiki/Software/VDPAU
 BuildRequires:	autoconf >= 2.60
 BuildRequires:	automake
@@ -93,6 +94,7 @@ Dokumentacja API biblioteki vdpau.
 
 %prep
 %setup -q
+%patch0 -p1
 
 %build
 %{__libtoolize}

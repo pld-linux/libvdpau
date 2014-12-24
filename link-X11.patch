@@ -1,0 +1,10 @@
+--- libvdpau-0.9/src/Makefile.am~	2014-11-05 00:17:39.000000000 +0000
++++ libvdpau-0.9/src/Makefile.am	2014-12-24 10:32:00.313583495 +0000
+@@ -22,6 +22,7 @@
+ libvdpau_la_LIBADD = \
+     $(DLOPEN_LIBS) \
+     $(PTHREAD_LIBS) \
++    $(X11_LIBS) \
+     $(XEXT_LIBS)
+ 
+ libvdpau_la_LDFLAGS = -version-info 1:0:0 -no-undefined
