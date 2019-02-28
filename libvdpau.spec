@@ -9,13 +9,13 @@
 Summary:	Wrapper library for the Video Decode and Presentation API
 Summary(pl.UTF-8):	Biblioteka pośrednia do API dekodowania i prezentacji video (Video Decode and Presentation API)
 Name:		libvdpau
-Version:	1.1.1
+Version:	1.2
 Release:	1
 License:	MIT
 Group:		Libraries
 #Source0Download: https://gitlab.freedesktop.org/vdpau/libvdpau/tags
-Source0:	https://gitlab.freedesktop.org/vdpau/libvdpau/uploads/5635163f040f2eea59b66d0181cf664b/%{name}-%{version}.tar.bz2
-# Source0-md5:	2fa0b05a4f4d06791eec83bc9c854d14
+Source0:	https://gitlab.freedesktop.org/vdpau/libvdpau/uploads/14b620084c027d546fa0b3f083b800c6/%{name}-%{version}.tar.bz2
+# Source0-md5:	7cca645c49d9cb11cba35516bfc21c1d
 Patch0:		link-X11.patch
 URL:		https://freedesktop.org/wiki/Software/VDPAU
 BuildRequires:	autoconf >= 2.60
