@@ -9,25 +9,24 @@
 Summary:	Wrapper library for the Video Decode and Presentation API
 Summary(pl.UTF-8):	Biblioteka pośrednia do API dekodowania i prezentacji video (Video Decode and Presentation API)
 Name:		libvdpau
-Version:	1.2
+Version:	1.3
 Release:	1
 License:	MIT
 Group:		Libraries
 #Source0Download: https://gitlab.freedesktop.org/vdpau/libvdpau/tags
-Source0:	https://gitlab.freedesktop.org/vdpau/libvdpau/uploads/14b620084c027d546fa0b3f083b800c6/%{name}-%{version}.tar.bz2
-# Source0-md5:	7cca645c49d9cb11cba35516bfc21c1d
-Patch0:		link-X11.patch
+Source0:	https://gitlab.freedesktop.org/vdpau/libvdpau/-/archive/%{version}/libvdpau-%{version}.tar.bz2
+# Source0-md5:	817e44068cbf92bfa93308daaeef2280
 URL:		https://freedesktop.org/wiki/Software/VDPAU
-BuildRequires:	autoconf >= 2.60
-BuildRequires:	automake
 %if %{with apidocs}
 BuildRequires:	doxygen
 BuildRequires:	graphviz
 %endif
 BuildRequires:	libstdc++-devel
-BuildRequires:	libtool
+BuildRequires:	meson >= 0.41
+BuildRequires:	ninja
 BuildRequires:	pkgconfig
 BuildRequires:	rpm >= 4.4.9-56
+BuildRequires:	rpmbuild(macros) >= 1.736
 %if "%{pld_release}" == "ac"
 BuildRequires:	XFree86-devel
 %else
@@ -63,24 +62,13 @@ Requires:	XFree86-devel
 Requires:	xorg-lib-libX11-devel
 %endif
 Requires:	%{name} = %{version}-%{release}
+Obsoletes:	libvdpau-static
 
 %description devel
 Header files for vdpau library.
 
 %description devel -l pl.UTF-8
 Pliki nagłówkowe biblioteki vdpau.
-
-%package static
-Summary:	Static vdpau library
-Summary(pl.UTF-8):	Statyczna biblioteka vdpau
-Group:		Development/Libraries
-Requires:	%{name}-devel = %{version}-%{release}
-
-%description static
-Static vdpau library.
-
-%description static -l pl.UTF-8
-Statyczna biblioteka vdpau.
 
 %package apidocs
 Summary:	vdpau API documentation
@@ -98,29 +86,17 @@ Dokumentacja API biblioteki vdpau.
 
 %prep
 %setup -q
-%patch0 -p1
 
 %build
-%{__libtoolize}
-%{__aclocal}
-%{__autoconf}
-%{__autoheader}
-%{__automake}
-%if "%{pld_release}" == "ac"
-X11_CFLAGS=" " X11_LIBS="-L%{_prefix}/X11R6/%{_lib} -lX11" \
-%endif
-%configure \
-	--enable-documentation%{!?with_apidocs:=no} \
-	--enable-static
-%{__make}
+%meson build \
+	-Ddocumentation=%{__true_false apidocs}
+%ninja_build -C build
 
 %install
 rm -rf $RPM_BUILD_ROOT
 
-%{__make} install \
-	DESTDIR=$RPM_BUILD_ROOT
+%ninja_install -C build
 
-%{__rm} $RPM_BUILD_ROOT%{_libdir}/vdpau/libvdpau_trace.{la,a}
 %{__rm} $RPM_BUILD_ROOT%{_libdir}/vdpau/libvdpau_trace.so
 
 %if %{with apidocs}
@@ -135,7 +111,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc AUTHORS COPYING ChangeLog
+%doc AUTHORS COPYING
 %attr(755,root,root) %{_libdir}/libvdpau.so.*.*.*
 %attr(755,root,root) %ghost %{_libdir}/libvdpau.so.1
 %dir %{_libdir}/vdpau
@@ -146,13 +122,8 @@ rm -rf $RPM_BUILD_ROOT
 %files devel
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/libvdpau.so
-%{_libdir}/libvdpau.la
 %{_includedir}/vdpau
 %{_pkgconfigdir}/vdpau.pc
-
-%files static
-%defattr(644,root,root,755)
-%{_libdir}/libvdpau.a
 
 %if %{with apidocs}
 %files apidocs
