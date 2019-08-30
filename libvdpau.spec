@@ -1,7 +1,7 @@
 #
 # Conditional build:
 %if "%{pld_release}" == "ac"
-%bcond_with		apidocs		# build and package API docs
+%bcond_with	apidocs		# build and package API docs
 %else
 %bcond_without	apidocs		# do not build and package API docs
 %endif
@@ -23,7 +23,7 @@ BuildRequires:	graphviz
 %endif
 BuildRequires:	libstdc++-devel
 BuildRequires:	meson >= 0.41
-BuildRequires:	ninja
+BuildRequires:	ninja >= 1.5
 BuildRequires:	pkgconfig
 BuildRequires:	rpm >= 4.4.9-56
 BuildRequires:	rpmbuild(macros) >= 1.736
