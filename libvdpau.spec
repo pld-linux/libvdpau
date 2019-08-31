@@ -20,6 +20,8 @@ URL:		https://freedesktop.org/wiki/Software/VDPAU
 %if %{with apidocs}
 BuildRequires:	doxygen
 BuildRequires:	graphviz
+BuildRequires:	texlive-dvips
+BuildRequires:	texlive-latex
 %endif
 BuildRequires:	libstdc++-devel
 BuildRequires:	meson >= 0.41
