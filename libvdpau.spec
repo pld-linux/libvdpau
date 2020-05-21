@@ -1,21 +1,17 @@
 #
 # Conditional build:
-%if "%{pld_release}" == "ac"
-%bcond_with	apidocs		# build and package API docs
-%else
 %bcond_without	apidocs		# do not build and package API docs
-%endif
 
 Summary:	Wrapper library for the Video Decode and Presentation API
 Summary(pl.UTF-8):	Biblioteka pośrednia do API dekodowania i prezentacji video (Video Decode and Presentation API)
 Name:		libvdpau
-Version:	1.3
-Release:	2
+Version:	1.4
+Release:	1
 License:	MIT
 Group:		Libraries
 #Source0Download: https://gitlab.freedesktop.org/vdpau/libvdpau/tags
 Source0:	https://gitlab.freedesktop.org/vdpau/libvdpau/-/archive/%{version}/libvdpau-%{version}.tar.bz2
-# Source0-md5:	817e44068cbf92bfa93308daaeef2280
+# Source0-md5:	a664cc2cfe9c30536d2e11c928cbea35
 URL:		https://freedesktop.org/wiki/Software/VDPAU
 %if %{with apidocs}
 BuildRequires:	doxygen
@@ -29,14 +25,10 @@ BuildRequires:	ninja >= 1.5
 BuildRequires:	pkgconfig
 BuildRequires:	rpm >= 4.4.9-56
 BuildRequires:	rpmbuild(macros) >= 1.736
-%if "%{pld_release}" == "ac"
-BuildRequires:	XFree86-devel
-%else
 %{?with_apidocs:BuildRequires:	texlive-pdftex}
 BuildRequires:	xorg-lib-libX11-devel >= 1.5
 BuildRequires:	xorg-lib-libXext-devel
 BuildRequires:	xorg-proto-dri2proto-devel >= 2.2
-%endif
 Requires:	xorg-lib-libX11 >= 1.5
 # withdrawn (and never useful) Mesa drivers
 Obsoletes:	libvdpau-driver-mesa-r300 < 10
@@ -58,12 +50,8 @@ prezentacji video obecnej we współczesnych procesorach graficznych.
 Summary:	Header files for vdpau library
 Summary(pl.UTF-8):	Pliki nagłówkowe biblioteki vdpau
 Group:		Development/Libraries
-%if "%{pld_release}" == "ac"
-Requires:	XFree86-devel
-%else
-Requires:	xorg-lib-libX11-devel
-%endif
 Requires:	%{name} = %{version}-%{release}
+Requires:	xorg-lib-libX11-devel
 Obsoletes:	libvdpau-static
 
 %description devel
@@ -76,7 +64,7 @@ Pliki nagłówkowe biblioteki vdpau.
 Summary:	vdpau API documentation
 Summary(pl.UTF-8):	Dokumentacja API biblioteki vdpau
 Group:		Documentation
-%if "%{_rpmversion}" >= "5"
+%if "%{_rpmversion}" >= "4.6"
 BuildArch:	noarch
 %endif
 
@@ -102,7 +90,7 @@ rm -rf $RPM_BUILD_ROOT
 %{__rm} $RPM_BUILD_ROOT%{_libdir}/vdpau/libvdpau_trace.so
 
 %if %{with apidocs}
-mv $RPM_BUILD_ROOT%{_docdir}/{%{name}/html,%{name}-apidocs}
+%{__mv} $RPM_BUILD_ROOT%{_docdir}/{%{name}/html,%{name}-apidocs}
 %endif
 
 %clean
