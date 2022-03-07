@@ -16,6 +16,7 @@ URL:		https://freedesktop.org/wiki/Software/VDPAU
 %if %{with apidocs}
 BuildRequires:	doxygen
 BuildRequires:	graphviz
+BuildRequires:	rpm-build >= 4.6
 BuildRequires:	texlive-dvips
 BuildRequires:	texlive-latex
 %endif
