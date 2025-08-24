@@ -25,7 +25,7 @@ BuildRequires:	meson >= 0.41
 BuildRequires:	ninja >= 1.5
 BuildRequires:	pkgconfig
 BuildRequires:	rpm >= 4.4.9-56
-BuildRequires:	rpmbuild(macros) >= 1.736
+BuildRequires:	rpmbuild(macros) >= 2.042
 %{?with_apidocs:BuildRequires:	texlive-pdftex}
 BuildRequires:	xorg-lib-libX11-devel >= 1.5
 BuildRequires:	xorg-lib-libXext-devel
